@@ -9,6 +9,7 @@ body {
     cursor: crosshair;
     padding-left: 20px;
     padding-right: 20px;
+    color: #59EA56;
 };
 
 .marquee-title {
@@ -20,18 +21,47 @@ body {
 }
 
 .marquee-track {
-    position: absolute;
+    position: relative;
     white-space: nowrap;
     will-change: transform;
     animation: marquee 32s linear infinite;
-    color:  #59EA56;
+    color:  #DE56EA;
     font-size: 92px;
     font-style: italic;
+}
 
-  }
-  
+.grid-container {
+    min-height: 100vh;
+    display: flex;
+}
+
+.left-screen {
+    width: 50%;
+}
+
+.right-screen {
+    width: 50%;
+}
+
+.text-init {
+    font-size: 36px;
+    color: white;
+}
+
+.image-full-screen {
+    width: 100%;
+    margin-top: 10px;
+    margin-left: 0px;
+}
+
+.ascii-animation {
+    width: 700px !important;
+    height: 700px !important;
+}
+
   @keyframes marquee {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
   }
+
   

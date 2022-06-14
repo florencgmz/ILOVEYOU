@@ -1,0 +1,37 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+    font-family: 'Neue Montreal';
+    font-weight: 500;
+    background-color: black;
+    cursor: crosshair;
+    padding-left: 20px;
+    padding-right: 20px;
+};
+
+.marquee-title {
+    position: relative;
+    width: 100vw;
+    max-width: 100%;
+    height: 200px;
+    overflow-x: hidden;  
+}
+
+.marquee-track {
+    position: absolute;
+    white-space: nowrap;
+    will-change: transform;
+    animation: marquee 32s linear infinite;
+    color:  #59EA56;
+    font-size: 92px;
+    font-style: italic;
+
+  }
+  
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  

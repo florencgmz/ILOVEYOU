@@ -2,8 +2,14 @@
 	box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'Syne-Mono';
+    src: url(../assets/SyneMono-Regular.ttf);
+    font-weight: normal; 
+}
+
 body {
-    font-family: 'Syne Mono';
+    font-family: 'Syne-Mono';
     font-weight: 500;
     background-color: black;
     cursor: crosshair;
@@ -44,6 +50,12 @@ body {
 .text-init {
     font-size: 36px;
     color: white;
+}
+
+#text-green {
+    font-size: 36px;
+    color: #59EA56;
+    text-justify: inter-word;
 }
 
 .image-full-screen {

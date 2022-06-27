@@ -7,9 +7,9 @@ function setup() {
   noCanvas();
   video = createVideo("../assets/1.mp4");
   video.size(90, 80);
-  asciiDiv = createDiv();
   video.play();
   video.loop();
+  asciiDiv = createDiv();
 }
 
 function draw() {

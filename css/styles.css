@@ -70,6 +70,10 @@ body {
     padding-bottom: 10px;
 }
 
+#typewriter {
+    overflow-y:scroll;
+}
+
   @keyframes marquee {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }

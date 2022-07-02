@@ -7,9 +7,10 @@ function setup() {
   noCanvas();
   video = createVideo("../assets/1.mp4");
   video.size(90, 80);
-  asciiDiv = createDiv();
   video.play();
   video.loop();
+  video.volume(0);
+  asciiDiv = createDiv();
 }
 
 function draw() {
@@ -32,5 +33,5 @@ function draw() {
     asciiImage += '<br/>';
   }
   asciiDiv.html(asciiImage);
-  asciiDiv.parent("ascii");
+  //asciiDiv.parent("ascii");
 }

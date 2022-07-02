@@ -23,4 +23,17 @@ $('#text-green')
         // set the new text
         that.text(textToSet);
     });
-    
+
+var breakpoint = false;
+
+$(window).scroll(function() {
+  if ($(this).scrollTop() > 800 && !breakpoint ) {
+     //doStuff();
+  }
+})
+
+function doStuff() {
+  breakpoint = true;
+  //alert("hola!");
+  //window.location.href = "./script.html"
+}

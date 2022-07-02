@@ -9,70 +9,92 @@
 }
 
 body {
-    font-family: 'Syne-Mono';
+    font-family: 'Courier New', Courier, monospace;
+    font-style: italic;
     font-weight: 500;
-    background-color: black;
+    background-color: white;
     cursor: crosshair;
     padding-left: 20px;
     padding-right: 20px;
-    color: #59EA56;
+    color: black;
 };
 
-.marquee-title {
+
+.title-marquee {
     position: relative;
+    display: block;
+    width: 100%;
+    height: 80px;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    overflow: hidden;
+    grid-area: title;
 }
 
-.marquee-track {
-    position: relative;
+.text-marquee {
+    position: absolute;
+    display: block;
+    margin: auto auto;
     white-space: nowrap;
-    will-change: transform;
-    animation: marquee 32s linear infinite;
-    color:  #e829fa;
-    font-size: 92px;
-    font-style: italic;
-    width: 100vw !important;
-    max-width: 100% !important;
+    overflow: hidden;
+    min-width: 100%;
+    height: 100%;
 }
 
-.grid-container {
-    min-height: 100vh;
-    display: flex;
+.text-marquee span {
+    display: inline-block;
+    padding-left: 100%;
+    font-family: monospace;
+    text-align: center;
+    white-space: nowrap;
+    min-width: 100%;
+    height: 100%;
+    color: #394dcd;
+    font-size: 5em;
+    font-family: 'Syne-Mono';
+    animation: marquee 30s linear infinite;
 }
 
-.left-screen {
-    width: 50%;
+text-marquee2 {
+    animation-delay: 5s;
 }
 
-.right-screen {
-    width: 50%;
-}
 
 .text-init {
-    font-size: 36px;
-    color: white;
+    font-size: 1em;
+    color: black;
+    grid-area: intro;
+    margin-top: 100px;
 }
 
 #text-green {
-    font-size: 36px;
-    color: #59EA56;
+    margin-top: 10px;
+    font-size: 1em;
+    color: black;
     text-justify: inter-word;
+    grid-area: bio;
 }
 
 .image-full-screen {
-    width: 100%;
-    margin-top: 10px;
-    margin-left: 0px;
+    grid-area: image;
+}
+.grid-container {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 2fr);
+    gap: 30px;
+    grid-template-areas: 
+    "title title" 
+    "intro intro"
+    "image virus"
+    "bio bio";
 }
 
-#ascii {
-    width: 500px !important;
-    height: 500px !important;
-    padding-bottom: 10px;
-}
 
   @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    from { transform: translateX(0%); }
+    to { transform: translateX(-100%); }
   }
 
   

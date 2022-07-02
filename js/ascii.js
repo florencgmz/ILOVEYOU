@@ -9,7 +9,10 @@ function setup() {
   video.size(90, 80);
   video.play();
   video.loop();
+<<<<<<< HEAD
   video.volume(0);
+=======
+>>>>>>> b382f9b2d23e1209a06ad3411b1fb54e36c53b73
   asciiDiv = createDiv();
 }
 
